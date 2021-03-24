@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class sampleVO {
+public class SampleLombokVO {
 	private String text;
 }

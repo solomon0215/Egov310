@@ -20,7 +20,7 @@ import java.util.List;
 import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
-
+import egovframework.example.sample.vo.SampleLombokVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 
@@ -73,7 +73,10 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 	@Override
 	public String insertSample(SampleVO vo) throws Exception {
 		LOGGER.debug(vo.toString());
-
+		SampleLombokVO lomVO = new SampleLombokVO().builder()
+							.text("")
+							.build();
+		lomVO.getText();
 		/** ID Generation Service */
 		String id = egovIdGnrService.getNextStringId();
 		vo.setId(id);
