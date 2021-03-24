@@ -17,18 +17,20 @@ package egovframework.example.sample.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
 import egovframework.example.sample.service.EgovSampleService;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 import egovframework.example.sample.vo.SampleLombokVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.fdl.idgnr.EgovIdGnrService;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : EgovSampleServiceImpl.java
@@ -73,10 +75,14 @@ public class EgovSampleServiceImpl extends EgovAbstractServiceImpl implements Eg
 	@Override
 	public String insertSample(SampleVO vo) throws Exception {
 		LOGGER.debug(vo.toString());
+		EgovMap govMap = new EgovMap();
+		govMap.put("text", "test");
 		SampleLombokVO lomVO = new SampleLombokVO().builder()
-							.text("")
+							.text(govMap.get("text").toString())
 							.build();
 		lomVO.getText();
+		SampleLombokVO lom = new SampleLombokVO();
+		org.springframework.beans.BeanUtils.copyProperties(lomVO, lom);
 		/** ID Generation Service */
 		String id = egovIdGnrService.getNextStringId();
 		vo.setId(id);
